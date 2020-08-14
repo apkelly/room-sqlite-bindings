@@ -52,6 +52,8 @@ https://sqlite.org/download.html
 
 ## Building
 Run the following command to build and upload a new version of the library to bintray.
+
+
         ./gradlew clean build bintrayUpload
 
 ## Contributions
