@@ -16,10 +16,11 @@ https://sqlite.org/download.html
            }
         }
 
-1. Add the following dependency to the module that uses Room.
+1. Add the following dependencies to the module that uses Room.
 
 
         implementation "dev.nibbles.android.room:room_sqlite_bindings:1.0.0"
+        implementation project(':sqlite-android-xxxxxxx')
 
 1. Add the .openHelperFactory(SQLiteOrgOpenHelperFactory) binding to your Room database configuration.
 
