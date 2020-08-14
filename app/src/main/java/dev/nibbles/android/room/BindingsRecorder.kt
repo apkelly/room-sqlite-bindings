@@ -43,7 +43,7 @@ internal class BindingsRecorder : SupportSQLiteProgram {
             if (binding != null) {
                 result[i] = bindings[key].toString()
             } else {
-                result[i] = "" // SQLCipher does not like null binding values
+                result[i] = ""
             }
         }
         return result

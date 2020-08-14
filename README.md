@@ -39,7 +39,7 @@ https://sqlite.org/download.html
                         INSTANCE ?: Room.databaseBuilder(
                             context.applicationContext,
                             MyRoomDatabase::class.java,
-                        "my_database"
+                            "my_database"
                         )
                         .openHelperFactory(SQLiteOrgOpenHelperFactory)
                         .build().also {
@@ -49,6 +49,10 @@ https://sqlite.org/download.html
                 }
             }
         }
+
+## Building
+Run the following command to build and upload a new version of the library to bintray.
+        ./gradlew clean build bintrayUpload
 
 ## Contributions
 If you find any bugs, or you have any improvements please do reach out I'm more than happy to include fixes where possible.
