@@ -1,6 +1,6 @@
 # Built application files
 *.apk
-*.aar
+#*.aar
 *.ap_
 *.aab
 
@@ -9,6 +9,10 @@
 
 # Java class files
 *.class
+
+*.iml
+*.DS_Store
+
 
 # Generated files
 bin/
@@ -20,6 +24,7 @@ out/
 # Gradle files
 .gradle/
 build/
+/captures
 
 # Local configuration file (sdk path, etc)
 local.properties

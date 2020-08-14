@@ -1,0 +1,3 @@
+rootProject.name = "RoomSQLiteBindings"
+include ':app'
+include ':sqlite-android'

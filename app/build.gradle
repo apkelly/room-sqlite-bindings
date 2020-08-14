@@ -1,0 +1,76 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'com.jfrog.bintray'
+    id 'maven-publish'
+}
+
+def libraryGroupId = 'dev.nibbles.android.room'
+def libraryArtifactId = 'room_sqlite_bindings'
+def libraryVersion = '1.0.0'
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 1
+        versionName libraryVersion
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+// Configure publications using the afterEvaluate() lifecycle method.
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.release
+                groupId = libraryGroupId
+                artifactId = libraryArtifactId
+                version = libraryVersion
+            }
+        }
+    }
+}
+
+bintray {
+    user = project.hasProperty('bintray.user') ? project.property('bintray.user') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintray.token') ? project.property('bintray.token') : System.getenv('BINTRAY_API_KEY')
+    publications = ['release']
+    publish = true
+    override = true
+    pkg {
+        repo = 'dev-nibbles'
+        name = libraryArtifactId
+        desc = 'Bindings between the Android Room library and the SQLite database from sqlite.org (not the one bundled with Android).'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/apkelly/room_sqlite_bindings.git'
+        publicDownloadNumbers = true
+        version {
+            name = libraryVersion
+            released = new Date()
+        }
+    }
+}
+
+dependencies {
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compileOnly "androidx.room:room-runtime:2.2.5"
+    compileOnly project(':sqlite-android')
+}
